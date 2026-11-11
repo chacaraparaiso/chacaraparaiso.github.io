@@ -273,6 +273,7 @@
   if (window.Swiper) {
     new Swiper(".gal", {
       slidesPerView: "auto",
+      speed: calmo ? 0 : 300,   // sem animação quando o sistema pede menos movimento
       spaceBetween: 14,
       grabCursor: true,
       pagination: { el: ".gal .swiper-pagination", clickable: true, dynamicBullets: true },
@@ -281,6 +282,29 @@
     });
   }
   if (window.GLightbox) {
-    GLightbox({ selector: ".glightbox", touchNavigation: true, loop: true, openEffect: "fade", closeEffect: "fade" });
+    // Com as animações do sistema desligadas, o GLightbox nunca recebia o fim da
+    // animação de saída e a página ficava travada. Sem efeito nesses casos:
+    const efeito = calmo ? "none" : "fade";
+    const lb = GLightbox({ selector: ".glightbox", touchNavigation: true, loop: true,
+      openEffect: efeito, closeEffect: efeito, slideEffect: calmo ? "none" : "slide" });
+
+    // Trava de segurança: se não terminar de fechar em 900 ms, fecha à força.
+    const fecharOriginal = lb.close.bind(lb);
+    lb.close = function () {
+      const r = fecharOriginal();
+      setTimeout(() => {
+        if (!lb.lightboxOpen || !lb.closing) return;
+        lb.activeSlide = lb.prevActiveSlide = lb.prevActiveSlideIndex = null;
+        lb.built = false;
+        if (lb.events) { Object.keys(lb.events).forEach((k) => lb.events[k].destroy()); lb.events = null; }
+        document.documentElement.classList.remove("glightbox-open");
+        document.body.classList.remove("glightbox-open", "touching", "gdesc-open", "glightbox-touch", "glightbox-mobile", "gscrollbar-fixer");
+        if (lb.modal && lb.modal.parentNode) lb.modal.parentNode.removeChild(lb.modal);
+        const css = document.querySelector(".gcss-styles"); if (css) css.remove();
+        lb.lightboxOpen = false; lb.closing = null;
+        lb.trigger && lb.trigger("close");
+      }, 900);
+      return r;
+    };
   }
 })();
