@@ -33,5 +33,5 @@ Envie a pasta inteira (sem `_backup`) para Netlify, Vercel ou GitHub Pages.
 ## Google (SEO)
 - No topo do `index.html` ficam o título, a descrição e a "ficha" do Google (bloco `application/ld+json`).
 - Se mudar as perguntas frequentes no `config.js`, atualize também o bloco `FAQPage` no `index.html`.
-- Ao trocar para domínio próprio (.com.br), substitua `https://alexandrebarbosa8.github.io/chacara-paraiso/` no `index.html` e no `sitemap.xml`.
+- Ao trocar para domínio próprio (.com.br), substitua `https://chacaraparaiso.github.io/` no `index.html` e no `sitemap.xml`.
 - Atualizações de CSS/JS: troque o número `?v=` nos links do `index.html` para o celular não usar versão antiga.

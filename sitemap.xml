@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://alexandrebarbosa8.github.io/chacara-paraiso/</loc>
+    <loc>https://chacaraparaiso.github.io/</loc>
     <lastmod>2026-11-11</lastmod>
-    <image:image><image:loc>https://alexandrebarbosa8.github.io/chacara-paraiso/fotos/piscina.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandrebarbosa8.github.io/chacara-paraiso/fotos/vista.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandrebarbosa8.github.io/chacara-paraiso/fotos/drone.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandrebarbosa8.github.io/chacara-paraiso/fotos/fogueira.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandrebarbosa8.github.io/chacara-paraiso/fotos/entrada.jpg</image:loc></image:image>
+    <image:image><image:loc>https://chacaraparaiso.github.io/fotos/piscina.jpg</image:loc></image:image>
+    <image:image><image:loc>https://chacaraparaiso.github.io/fotos/vista.jpg</image:loc></image:image>
+    <image:image><image:loc>https://chacaraparaiso.github.io/fotos/drone.jpg</image:loc></image:image>
+    <image:image><image:loc>https://chacaraparaiso.github.io/fotos/fogueira.jpg</image:loc></image:image>
+    <image:image><image:loc>https://chacaraparaiso.github.io/fotos/entrada.jpg</image:loc></image:image>
   </url>
 </urlset>
