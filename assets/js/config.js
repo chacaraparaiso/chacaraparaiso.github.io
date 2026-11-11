@@ -83,7 +83,7 @@ window.CONFIG = {
   galeria: [
     { src: "fotos/piscina.jpg",   legenda: "Piscina e construções do sítio" },
     { src: "fotos/vista.jpg",     legenda: "Vista das montanhas a partir do gramado" },
-    { src: "fotos/drone.mp4",     legenda: "Vista aérea do sítio", poster: "fotos/drone.jpg", video: true },
+    { src: "fotos/drone.mp4",     legenda: "Vista aérea da entrada e do estacionamento", poster: "fotos/drone-capa.jpg", video: true },
     { src: "fotos/fogueira.jpg",  legenda: "Noite em volta da fogueira" },
     { src: "fotos/drone.jpg",     legenda: "Campo de futebol visto de cima" },
     { src: "fotos/entrada.jpg",   legenda: "Entrada e estacionamento" },

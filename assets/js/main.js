@@ -136,21 +136,54 @@
     `<li class="reveal"><span class="ev-ico"><svg viewBox="0 0 24 24" aria-hidden="true">${EV[e.icone] || EV.estrela}</svg></span><div><h3>${esc(e.nome)}</h3><p>${esc(e.texto)}</p></div></li>`).join("");
 
   /* ================= Galeria ================= */
-  // Vídeos abrem no player do próprio navegador (sem depender de serviço externo)
-  const videosHtml = [];
-  $("[data-galeria]").innerHTML = C.galeria.map((g, i) => {
-    const capa = g.video ? g.poster : g.src;
-    let href = esc(g.src), extra = "";
+  // Fotos abrem no GLightbox; vídeos abrem no player próprio (abaixo),
+  // que usa os controles nativos do celular e não briga com o arrastar da galeria.
+  $("[data-galeria]").innerHTML = C.galeria.map((g) => {
     if (g.video) {
-      href = `#gal-video-${i}`; extra = ' data-type="inline" data-width="min(92vw, 520px)"';
-      videosHtml.push(`<div id="gal-video-${i}"><video src="${esc(g.src)}" poster="${esc(g.poster || "")}" controls playsinline loop style="width:100%;max-height:82vh;border-radius:12px;background:#000"></video></div>`);
+      return `<div class="swiper-slide"><a class="gal-item gal-video" href="${esc(g.src)}" data-video="${esc(g.src)}" data-poster="${esc(g.poster || "")}" data-legenda="${esc(g.legenda)}" aria-label="Assistir vídeo: ${esc(g.legenda)}">
+        <img src="${esc(g.poster || "")}" alt="${esc(g.legenda)}" loading="lazy">
+        <span class="gal-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+        <figcaption>${esc(g.legenda)}</figcaption></a></div>`;
     }
-    return `<div class="swiper-slide"><a class="gal-item glightbox" href="${href}" data-gallery="galeria" data-glightbox="description: ${esc(g.legenda)}"${extra}>
-      <img src="${esc(capa)}" alt="${esc(g.legenda)}" loading="lazy">
-      ${g.video ? '<span class="gal-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>' : ""}
+    return `<div class="swiper-slide"><a class="gal-item glightbox" href="${esc(g.src)}" data-gallery="galeria" data-glightbox="description: ${esc(g.legenda)}">
+      <img src="${esc(g.src)}" alt="${esc(g.legenda)}" loading="lazy">
       <figcaption>${esc(g.legenda)}</figcaption></a></div>`;
   }).join("");
-  if (videosHtml.length) { const box = document.createElement("div"); box.hidden = true; box.innerHTML = videosHtml.join(""); document.body.appendChild(box); }
+
+  /* ================= Player de vídeo ================= */
+  (function () {
+    const p = document.createElement("div");
+    p.className = "player"; p.hidden = true;
+    p.setAttribute("role", "dialog"); p.setAttribute("aria-modal", "true"); p.setAttribute("aria-label", "Vídeo");
+    p.innerHTML = `<button class="player__close" type="button" aria-label="Fechar vídeo"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <div class="player__box"><video controls playsinline preload="none"></video></div><p class="player__cap"></p>`;
+    document.body.appendChild(p);
+    const v = $("video", p), cap = $(".player__cap", p);
+    let aberto = false, voltar = null;
+
+    function abrir(src, poster, legenda) {
+      v.poster = poster; v.src = src; cap.textContent = legenda;
+      p.hidden = false; aberto = true; document.body.classList.add("no-scroll");
+      voltar = document.activeElement; $(".player__close", p).focus();
+      history.pushState({ player: 1 }, "");           // botão "voltar" do celular fecha o vídeo
+      const r = v.play(); if (r) r.catch(() => {});
+    }
+    function fechar(viaHistorico) {
+      if (!aberto) return;
+      aberto = false; v.pause(); v.removeAttribute("src"); v.load();
+      p.hidden = true; document.body.classList.remove("no-scroll");
+      if (voltar) voltar.focus({ preventScroll: true });
+      if (!viaHistorico && history.state && history.state.player) history.back();
+    }
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("[data-video]"); if (!a) return;
+      e.preventDefault(); abrir(a.dataset.video, a.dataset.poster, a.dataset.legenda);
+    });
+    $(".player__close", p).addEventListener("click", () => fechar(false));
+    p.addEventListener("click", (e) => { if (e.target === p || e.target.classList.contains("player__box")) fechar(false); });
+    addEventListener("keydown", (e) => { if (e.key === "Escape") fechar(false); });
+    addEventListener("popstate", () => fechar(true));
+  })();
 
   /* ================= FAQ ================= */
   $("[data-faq]").innerHTML = C.perguntas.map((q, i) =>
@@ -248,6 +281,6 @@
     });
   }
   if (window.GLightbox) {
-    GLightbox({ selector: ".glightbox", touchNavigation: true, loop: true, openEffect: "fade", closeEffect: "fade", width: "min(92vw, 1100px)" });
+    GLightbox({ selector: ".glightbox", touchNavigation: true, loop: true, openEffect: "fade", closeEffect: "fade" });
   }
 })();
