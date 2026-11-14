@@ -39,11 +39,12 @@ window.CONFIG = {
      Sem foto, o card aparece com o selo "Fotos em breve". */
   ambientes: [
     { id: "salao", nome: "Salão de eventos", medida: "≈ 300 m²",
-      texto: "Amplo para casamentos, aniversários, formaturas e confraternizações, com banheiros próprios.",
-      fotos: [] },
+      texto: "Amplo e coberto, com estrutura em madeira, piso claro e banheiros próprios. Pronto para casamentos, aniversários, formaturas e confraternizações.",
+      fotos: ["fotos/salao-1.jpg"] },
     { id: "gourmet", nome: "Espaço gourmet", medida: "≈ 180 m²",
-      texto: "Churrasqueira, fogão a lenha e forno iglu para pizzas. Do almoço de família ao jantar de festa.",
-      fotos: [] },
+      texto: "Churrasqueira, fogão a lenha, forno de pizza, bar e uma mesa rústica enorme, de frente para o jardim e a piscina.",
+      fotos: ["fotos/gourmet-1.jpg", "fotos/gourmet-2.jpg", "fotos/gourmet-3.jpg", "fotos/gourmet-4.jpg",
+              "fotos/gourmet-5.jpg", "fotos/gourmet-6.jpg", "fotos/gourmet-7.jpg", "fotos/gourmet-8.jpg"] },
     { id: "suites", nome: "Suítes", medida: "7 independentes",
       texto: "Privacidade para cada família ou grupo ficar o fim de semana inteiro, sem pegar estrada de madrugada.",
       fotos: [] },
@@ -82,9 +83,15 @@ window.CONFIG = {
   // Galeria: fotos e vídeos (na ordem em que aparecem)
   galeria: [
     { src: "fotos/piscina.jpg",   legenda: "Piscina e construções do sítio" },
+    { src: "fotos/tour-sitio.mp4", legenda: "Tour pelo sítio ao entardecer", poster: "fotos/tour-capa.jpg", video: true },
+    { src: "fotos/gourmet-2.jpg", legenda: "Espaço gourmet com vista para o jardim e a piscina" },
+    { src: "fotos/salao-1.jpg",   legenda: "Salão de eventos" },
+    { src: "fotos/gourmet-1.jpg", legenda: "Espaço gourmet: churrasqueira, fogão a lenha e forno de pizza" },
     { src: "fotos/vista.jpg",     legenda: "Vista das montanhas a partir do gramado" },
-    { src: "fotos/drone.mp4",     legenda: "Vista aérea da entrada e do estacionamento", poster: "fotos/drone-capa.jpg", video: true },
+    { src: "fotos/gourmet-7.jpg", legenda: "Espaço gourmet ao entardecer" },
     { src: "fotos/fogueira.jpg",  legenda: "Noite em volta da fogueira" },
+    { src: "fotos/gourmet-4.jpg", legenda: "Mesa rústica, bar e o salão ao fundo" },
+    { src: "fotos/drone.mp4",     legenda: "Vista aérea da entrada e do estacionamento", poster: "fotos/drone-capa.jpg", video: true },
     { src: "fotos/drone.jpg",     legenda: "Campo de futebol visto de cima" },
     { src: "fotos/entrada.jpg",   legenda: "Entrada e estacionamento" },
     { src: "fotos/banh_masc.jpg", legenda: "Banheiro masculino da área de eventos" },
