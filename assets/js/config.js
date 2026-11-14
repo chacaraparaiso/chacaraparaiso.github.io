@@ -5,7 +5,7 @@
 window.CONFIG = {
   nome: "Chácara Paraíso",
   frase: "Chácara para eventos, festas e fins de semana em Itabira - MG, em meio à mata nativa.",
-  status: "Inauguração em breve",
+  status: "",   // etiqueta no topo do site (ex.: "Datas abertas para 2027"); vazio = não aparece
 
   // WhatsApp: só números, com 55 + DDD. Ex.: "5531999999999"
   whatsapp: "5531997014005",

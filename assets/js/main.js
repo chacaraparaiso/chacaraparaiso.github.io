@@ -43,7 +43,12 @@
   $$("[data-fone]").forEach((e) => (e.textContent = fone));
 
   /* ================= Textos ================= */
-  $$("[data-status]").forEach((e) => (e.textContent = C.status));
+  // Etiqueta do topo: só aparece se houver texto em config.js (status)
+  $$("[data-status]").forEach((e) => {
+    e.textContent = C.status || "";
+    const pill = e.closest(".pill");
+    if (pill) pill.hidden = !C.status;
+  });
   $$("[data-frase]").forEach((e) => (e.textContent = C.frase));
   $$("[data-cidade]").forEach((e) => (e.textContent = `${C.local.endereco} · ${C.local.cidade}`));
   $$("[data-ano]").forEach((e) => (e.textContent = new Date().getFullYear()));
